@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private static String token;
 
     private void login() {
-        Login login = new Login("ncaliskan-stj@cits.com.tr", "W123654789w");
+        Login login = new Login("", "");
         Call<User> call = userClient.login(login);
 
         call.enqueue(new Callback<User>() {
