@@ -31,36 +31,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.btn_login).setOnClickListener(view -> { login();});
-        findViewById(R.id.btn_secret).setOnClickListener(view -> { getSecret();});
+        findViewById(R.id.btn_login).setOnClickListener(view -> {
+            login();
+        });
+        findViewById(R.id.btn_secret).setOnClickListener(view -> {
+            getSecret();
+        });
     }
+
     private static String token;
 
     private void login() {
-        Login login = new Login("ncaliskan-stj@cits.com.tr","W123654789w");
+        Login login = new Login("ncaliskan-stj@cits.com.tr", "W123654789w");
         Call<User> call = userClient.login(login);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, response.body().getToken(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, response.body().getToken(), Toast.LENGTH_SHORT).show();
                     token = response.body().getToken();
-                }
-                else{
-                    Toast.makeText(MainActivity.this, "login not correct :(" , Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "login not correct :(", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "error :(" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "error :(", Toast.LENGTH_SHORT).show();
 
             }
         });
 
     }
-    private void getSecret(){
+
+    private void getSecret() {
 
         Call<ResponseBody> call = userClient.getSecret(token);
 
@@ -69,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     try {
-                        Toast.makeText(MainActivity.this, response.body().string(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, response.body().string(), Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -79,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "token is not correct :(" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "token is not correct :(", Toast.LENGTH_SHORT).show();
 
             }
         });
