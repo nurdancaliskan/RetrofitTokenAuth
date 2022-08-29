@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_login).setOnClickListener(view -> { login();});
         findViewById(R.id.btn_secret).setOnClickListener(view -> { getSecret();});
-
     }
     private static String token;
 
